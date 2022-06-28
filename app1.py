@@ -1,8 +1,8 @@
 import pandas as pd
 import dash
 import dash_table
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 from dash.dependencies import Input, Output
 import plotly.express as px
 
@@ -15,6 +15,7 @@ dff = df.groupby('countriesAndTerritories', as_index=False)[['deaths', 'cases']]
 # print(df[:5])
 
 app.layout = html.Div([
+    html.H2('Covid-19 Distribution'),
     html.Div([dash_table.DataTable(
         id="dataTable_id",
         data=dff.to_dict('records'),
@@ -104,4 +105,5 @@ def update_data(rows, pievalue, linevalue):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=True, port=8000)
+
